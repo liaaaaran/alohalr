@@ -1,0 +1,26 @@
+---
+title: "r-packages-lr"
+author: "lia"
+date: "2/15/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+devtools::install_github("isteves/r-pkg-intro")
+library(greetings)
+greetings::say_aloha("Lia")
+```
+
+```{r}
+library(usethis) ## or library(devtools)
+use_git_config(user.name = "liaaaaran", user.email = "ran275@umail.ucsb.edu")
+
+# check by running a git situation-report: 
+#   - your user.name and user.email should appear in global Git config 
+git_sitrep()
+```
+
