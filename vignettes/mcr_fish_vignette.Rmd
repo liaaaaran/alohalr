@@ -1,0 +1,46 @@
+---
+title: "mcr_fish_vignette"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{mcr_fish_vignette}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(alohalr)
+library(tidyverse)
+library(janitor)
+```
+
+```{r}
+#  annual total counts by site
+mcr_sites <- alohalr::mcr_fish %>%
+  group_by(Site, Year, Mean_live_coral, Mean_total_coral) 
+
+mcr_clean <- mcr_fish %>%
+  clean_names()
+
+# do coral dwllers have an impact on mean live coral?
+ggplot(data = mcr_clean, aes(x = coral_dweller, y = mean_live_coral)) + 
+  geom_line(aes(color = site))
+
+# shows the trend of live coral over time, by site 
+ggplot(data = mcr_clean, aes(x = year, y = mean_live_coral)) + 
+  geom_line(aes(color = site))
+
+# mean live coral vs mean total coral... might be good to turn this into a percentage or something
+# how to interpret this? looks (almost)? logarithmic
+ggplot(data = mcr_clean, aes(x = mean_live_coral, y = mean_total_coral)) +
+  geom_point() +
+  geom_smooth()
+#  geom_line(aes(color = site))
+```
+

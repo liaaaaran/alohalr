@@ -1,0 +1,52 @@
+---
+title: "luq_anole_vignette"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{luq_anole_vignette}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(alohalr)
+library(tidyverse)
+library(janitor)
+```
+
+```{r}
+# anole is a type of lizard
+
+# subset of anolis stratulus
+an_strat = alohalr::luq_anole %>%
+  filter(SPECIES == "Anolis stratulus")
+
+# scatterplot of height vs snout-vent length, by gender
+ggplot(data = an_strat, aes(x = HEIGHT, y = SVL)) + 
+  geom_point() + 
+  facet_wrap(~ SEASON)
+
+# how to combine dry vs Dry... is there a difference?
+# would clean_names help?
+```
+
+```{r}
+# subset of anolis stratulus
+an_strat_clean = alohalr::luq_anole %>%
+  filter(SPECIES == "Anolis stratulus") %>%
+  clean_names()
+
+# scatterplot of height vs snout-vent length, by gender
+ggplot(data = an_strat_clean, aes(x = height, y = svl)) + 
+  geom_point() + 
+  facet_wrap(~ sex_age)
+
+# cleaning the data lets us plot sex_age (there was confusion with the variable name), but we can see that the data itself is actually quite messy 
+```
+

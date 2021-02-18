@@ -1,0 +1,33 @@
+---
+title: "pal_sediment_vignette"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{pal_sediment_vignette}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(alohalr)
+library(tidyverse)
+library(janitor)
+```
+
+```{r}
+# clean the data, just look at trap A
+sed_A = alohalr::pal_sediment %>%
+  filter(Trap == 'A') %>%
+  clean_names()
+
+#  plot total mass vs mas daily flux, colored by experiment 
+ggplot(data = sed_A, aes(x = total_mass_mg, y = mass_flux_mg_m2_day)) +
+  geom_line(aes(color = experiment)) 
+```
+

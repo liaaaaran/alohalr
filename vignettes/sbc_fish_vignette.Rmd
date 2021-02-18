@@ -1,0 +1,32 @@
+---
+title: "sbc_fish_vignette"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{sbc_fish_vignette}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(alohalr)
+library(tidyverse)
+```
+
+```{r}
+#  annual totals by site
+annual_counts <- alohalr::sbc_fish %>%
+  group_by(SITE, YEAR, TREATMENT) %>%
+  summarize(total_count = sum(COUNT))
+
+ggplot(data = annual_counts, aes(x = YEAR, y = total_count)) +
+  geom_line(aes(color = SITE)) +
+  facet_wrap(~ TREATMENT)
+```
+
