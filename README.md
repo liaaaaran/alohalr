@@ -4,7 +4,9 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of alohalr is to ...
+Demo package for building LTER cumulative dataset with info from 28 different sites. This demo package includes:
+Moorea Coral Reef: trends of live/total coral
+Santa Barbara Coastal: 
 
 ## Installation
 
